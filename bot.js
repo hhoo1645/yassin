@@ -261,15 +261,15 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}play ? áÊÔÛíá ÃÛäíÉ ÈÑÂÈØ Ãæ ÈÃÓã
-${prefix}skip ? áÊÌÂæÒ ÇáÃÛäíÉ ÇáÍÂáíÉ
-${prefix}pause ? ÅíÞÂÝ ÇáÃÛäíÉ ãÄÞÊÇ
-${prefix}resume ? áãæÂÕáÉ ÇáÅÛäíÉ ÈÚÏ ÅíÞÂÝåÂ ãÄÞÊÇ
-${prefix}vol ? áÊÛííÑ ÏÑÌÉ ÇáÕæÊ 100 - 0
-${prefix}stop ? áÅÎÑÂÌ ÇáÈæÊ ãä ÇáÑæã
-${prefix}np ? áãÚÑÝÉ ÇáÃÛäíÉ ÇáãÔÛáÉ ÍÂáíÇ
+${prefix}play ? شغل اغنيه
+${prefix}skip ? وقف الاغنيه
+${prefix}pause ? توقيف الاغنيه
+${prefix}resume ? تشغيل الاغنيه
+${prefix}vol ? الصوت 100 - 0
+${prefix}stop ? توقيف الاغنيه مؤقت
+${prefix}np ? مدري نسيت
 ${prefix}queue ? áãÚÑÝÉ ÞÂÆãÉ ÇáÊÔÛíá
-${prefix}viphelp ? áãÚÑÝå ÇæÇãÑ vip
+${prefix}viphelp ? خصيت الفي اي بي vip
 `);
    message.channel.sendEmbed(embed);
     
