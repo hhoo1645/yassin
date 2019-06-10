@@ -8,7 +8,7 @@ const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const queue = new Map();
 const client = new Discord.Client();
 
-const prefix = "1";
+const prefix = "a";
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
 	
@@ -25,18 +25,18 @@ client.on('message', async msg => { // eslint-disable-line
 	if (command === `play`) {
 
 		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('íÌÈ ÊæÂÌÏ ÍÖÑÊß ÈÑæã ÕæÊí .');
+		if (!voiceChannel) return msg.channel.send('Ã­ÃŒÃˆ ÃŠÃ¦Ã‚ÃŒÃ ÃÃ–Ã‘ÃŠÃŸ ÃˆÃ‘Ã¦Ã£ Ã•Ã¦ÃŠÃ­ .');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
 			
-			return msg.channel.send('áÇ íÊæÂÌÏ áÏí ÕáÇÍíÉ ááÊßáã ÈåÐÂ ÇáÑæã');
+			return msg.channel.send('Ã¡Ã‡ Ã­ÃŠÃ¦Ã‚ÃŒÃ Ã¡ÃÃ­ Ã•Ã¡Ã‡ÃÃ­Ã‰ Ã¡Ã¡ÃŠÃŸÃ¡Ã£ ÃˆÃ¥ÃÃ‚ Ã‡Ã¡Ã‘Ã¦Ã£');
 		}
 		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('áÇ íÊæÂÌÏ áÏí ÕáÇÍíÉ ááÊßáã ÈåÐÂ ÇáÑæã');
+			return msg.channel.send('Ã¡Ã‡ Ã­ÃŠÃ¦Ã‚ÃŒÃ Ã¡ÃÃ­ Ã•Ã¡Ã‡ÃÃ­Ã‰ Ã¡Ã¡ÃŠÃŸÃ¡Ã£ ÃˆÃ¥ÃÃ‚ Ã‡Ã¡Ã‘Ã¦Ã£');
 		}
 
 		if (!permissions.has('EMBED_LINKS')) {
-			return msg.channel.sendMessage("**íÌÈ ÊæÂÝÑ ÈÑãÔä `EMBED LINKS`áÏí **");
+			return msg.channel.sendMessage("**Ã­ÃŒÃˆ ÃŠÃ¦Ã‚ÃÃ‘ ÃˆÃ‘Ã£Ã”Ã¤ `EMBED LINKS`Ã¡ÃÃ­ **");
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -47,7 +47,7 @@ client.on('message', async msg => { // eslint-disable-line
 				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
 				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
-			return msg.channel.send(` **${playlist.title}** Êã ÇáÅÖÂÝÉ Åáì ÞÃÆãÉ ÇáÊÔÛíá`);
+			return msg.channel.send(` **${playlist.title}** ÃŠÃ£ Ã‡Ã¡Ã…Ã–Ã‚ÃÃ‰ Ã…Ã¡Ã¬ ÃžÃƒÃ†Ã£Ã‰ Ã‡Ã¡ÃŠÃ”Ã›Ã­Ã¡`);
 		} else {
 			try {
 
@@ -57,7 +57,7 @@ client.on('message', async msg => { // eslint-disable-line
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`**ÇáÑÌÂÁ ãä ÍÖÑÊß ÅÎÊíÂÑ ÑÞã ÇáãÞØÚ** :
+			        .setDescription(`**Ã‡Ã¡Ã‘ÃŒÃ‚Ã Ã£Ã¤ ÃÃ–Ã‘ÃŠÃŸ Ã…ÃŽÃŠÃ­Ã‚Ã‘ Ã‘ÃžÃ£ Ã‡Ã¡Ã£ÃžÃ˜Ãš** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
 					.setFooter("Ninja");
@@ -72,13 +72,13 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('áã íÊã ÅÎÊíÂÑ ãÞØÚ ÕæÊí');
+						return msg.channel.send('Ã¡Ã£ Ã­ÃŠÃ£ Ã…ÃŽÃŠÃ­Ã‚Ã‘ Ã£ÃžÃ˜Ãš Ã•Ã¦ÃŠÃ­');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send(':X: áÇ íÊæÝÑ äÊÂÆÌ ÈÍË ');
+					return msg.channel.send(':X: Ã¡Ã‡ Ã­ÃŠÃ¦ÃÃ‘ Ã¤ÃŠÃ‚Ã†ÃŒ ÃˆÃÃ‹ ');
 				}
 			}
 
@@ -86,64 +86,64 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		}
 	} else if (command === `s`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
-		if (!serverQueue) return msg.channel.send('áÇ íÊæÝÑ ãÞØÚ áÊÌÂæÒå');
-		serverQueue.connection.dispatcher.end('Êã ÊÌÂæÒ åÐÂ ÇáãÞØÚ');
+		if (!msg.member.voiceChannel) return msg.channel.send('ÃƒÃ¤ÃŠ Ã¡Ã“ÃŠ ÃˆÃ‘Ã¦Ã£ Ã•Ã¦ÃŠÃ­ .');
+		if (!serverQueue) return msg.channel.send('Ã¡Ã‡ Ã­ÃŠÃ¦ÃÃ‘ Ã£ÃžÃ˜Ãš Ã¡ÃŠÃŒÃ‚Ã¦Ã’Ã¥');
+		serverQueue.connection.dispatcher.end('ÃŠÃ£ ÃŠÃŒÃ‚Ã¦Ã’ Ã¥ÃÃ‚ Ã‡Ã¡Ã£ÃžÃ˜Ãš');
 		return undefined;
 	} else if (command === `join`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
+		if (!msg.member.voiceChannel) return msg.channel.send('ÃƒÃ¤ÃŠ Ã¡Ã“ÃŠ ÃˆÃ‘Ã¦Ã£ Ã•Ã¦ÃŠÃ­ .');
 		msg.member.voiceChannel.join();
 		return undefined;
 	} else if (command === `stop`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
+		if (!msg.member.voiceChannel) return msg.channel.send('ÃƒÃ¤ÃŠ Ã¡Ã“ÃŠ ÃˆÃ‘Ã¦Ã£ Ã•Ã¦ÃŠÃ­ .');
 		if (!serverQueue) return msg.guild.member(client).voiceChannel.leave();
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Êã ÅíÞÂÝ åÐÂ ÇáãÞØÚ');
+		serverQueue.connection.dispatcher.end('ÃŠÃ£ Ã…Ã­ÃžÃ‚Ã Ã¥ÃÃ‚ Ã‡Ã¡Ã£ÃžÃ˜Ãš');
 		return undefined;
 	} else if (command === `vol`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÔÛÂá.');
-		if (!args[1]) return msg.channel.send(`:loud_sound: ãÓÊæì ÇáÕæÊ **${serverQueue.volume}**`);
+		if (!msg.member.voiceChannel) return msg.channel.send('ÃƒÃ¤ÃŠ Ã¡Ã“ÃŠ ÃˆÃ‘Ã¦Ã£ Ã•Ã¦ÃŠÃ­ .');
+		if (!serverQueue) return msg.channel.send('Ã¡Ã‡ Ã­Ã¦ÃŒÃ Ã”Ã­Ã Ã”Ã›Ã‚Ã¡.');
+		if (!args[1]) return msg.channel.send(`:loud_sound: Ã£Ã“ÃŠÃ¦Ã¬ Ã‡Ã¡Ã•Ã¦ÃŠ **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
-		return msg.channel.send(`:speaker: Êã ÊÛíÑ ÇáÕæÊ Çáí **${args[1]}**`);
+		return msg.channel.send(`:speaker: ÃŠÃ£ ÃŠÃ›Ã­Ã‘ Ã‡Ã¡Ã•Ã¦ÃŠ Ã‡Ã¡Ã­ **${args[1]}**`);
 	} else if (command === `np`) {
 
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		if (!serverQueue) return msg.channel.send('Ã¡Ã‡ Ã­Ã¦ÃŒÃ Ã”Ã­Ã ÃÃ‡Ã¡Ã­ Ã Ã‡Ã¡ÃšÃ£Ã¡.');
 		const embedNP = new Discord.RichEmbed()
-	.setDescription(`:notes: ÇáÇä íÊã ÊÔÛíá : **${serverQueue.songs[0].title}**`);
+	.setDescription(`:notes: Ã‡Ã¡Ã‡Ã¤ Ã­ÃŠÃ£ ÃŠÃ”Ã›Ã­Ã¡ : **${serverQueue.songs[0].title}**`);
 		return msg.channel.sendEmbed(embedNP);
 	} else if (command === `queue`) {
 
 		
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		if (!serverQueue) return msg.channel.send('Ã¡Ã‡ Ã­Ã¦ÃŒÃ Ã”Ã­Ã ÃÃ‡Ã¡Ã­ Ã Ã‡Ã¡ÃšÃ£Ã¡.');
 		let index = 0;
 		
 		const embedqu = new Discord.RichEmbed()
 
 .setDescription(`**Songs Queue**
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**ÇáÇä íÊã ÊÔÛíá** ${serverQueue.songs[0].title}`);
+**Ã‡Ã¡Ã‡Ã¤ Ã­ÃŠÃ£ ÃŠÃ”Ã›Ã­Ã¡** ${serverQueue.songs[0].title}`);
 		return msg.channel.sendEmbed(embedqu);
 	} else if (command === `pause`) {
 
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('Êã ÅíÞÇÝ ÇáãæÓíÞì ãÄÞÊÇ!');
+			return msg.channel.send('ÃŠÃ£ Ã…Ã­ÃžÃ‡Ã Ã‡Ã¡Ã£Ã¦Ã“Ã­ÃžÃ¬ Ã£Ã„ÃžÃŠÃ‡!');
 		}
-		return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		return msg.channel.send('Ã¡Ã‡ Ã­Ã¦ÃŒÃ Ã”Ã­Ã ÃÃ‡Ã¡Ã­ Ã Ã‡Ã¡ÃšÃ£Ã¡.');
 	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('ÇÓÊÃäÝÊ ÇáãæÓíÞì ÈÇáäÓÈÉ áß !');
+			return msg.channel.send('Ã‡Ã“ÃŠÃƒÃ¤ÃÃŠ Ã‡Ã¡Ã£Ã¦Ã“Ã­ÃžÃ¬ ÃˆÃ‡Ã¡Ã¤Ã“ÃˆÃ‰ Ã¡ÃŸ !');
 		}
-		return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ýí ÇáÚãá.');
+		return msg.channel.send('Ã¡Ã‡ Ã­Ã¦ÃŒÃ Ã”Ã­Ã ÃÃ‡Ã¡Ã­ ÃÃ­ Ã‡Ã¡ÃšÃ£Ã¡.');
 	}
 
 	return undefined;
@@ -179,13 +179,13 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
-			return msg.channel.send(`áÇ ÃÓÊØíÚ ÏÎæá åÐÂ ÇáÑæã ${error}`);
+			return msg.channel.send(`Ã¡Ã‡ ÃƒÃ“ÃŠÃ˜Ã­Ãš ÃÃŽÃ¦Ã¡ Ã¥ÃÃ‚ Ã‡Ã¡Ã‘Ã¦Ã£ ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return msg.channel.send(` **${song.title}** Êã ÇÖÇÝå ÇáÇÛäíÉ Çáí ÇáÞÇÆãÉ!`);
+		else return msg.channel.send(` **${song.title}** ÃŠÃ£ Ã‡Ã–Ã‡ÃÃ¥ Ã‡Ã¡Ã‡Ã›Ã¤Ã­Ã‰ Ã‡Ã¡Ã­ Ã‡Ã¡ÃžÃ‡Ã†Ã£Ã‰!`);
 	}
 	return undefined;
 }
@@ -210,7 +210,7 @@ function play(guild, song) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
-	serverQueue.textChannel.send(`ÈÏÁ ÊÔÛíá : **${song.title}**`);
+	serverQueue.textChannel.send(`ÃˆÃÃ ÃŠÃ”Ã›Ã­Ã¡ : **${song.title}**`);
 }
 
 const adminprefix = "1vip";
@@ -221,20 +221,20 @@ client.on('message', message => {
     
 if (message.content.startsWith(adminprefix + 'setgame')) {
   client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} Êã ÊÛííÑ ÈáÇíäÞ ÇáÈæÊ Åáì **`);
+    message.channel.sendMessage(`**${argresult} ÃŠÃ£ ÃŠÃ›Ã­Ã­Ã‘ ÃˆÃ¡Ã‡Ã­Ã¤Ãž Ã‡Ã¡ÃˆÃ¦ÃŠ Ã…Ã¡Ã¬ **`);
 } else 
   if (message.content.startsWith(adminprefix + 'setname')) {
 client.user.setUsername(argresult).then;
-    message.channel.sendMessage(`**${argresult}** : Êã ÊÛííÑ ÃÓã ÇáÈæÊ Åáì`);
-return message.reply("**áÇ íãßäß ÊÛííÑ ÇáÇÓã íÌÈ Úáíß ÇáÇäÊÙÂÑ áãÏÉ ÓÇÚÊíä . **");
+    message.channel.sendMessage(`**${argresult}** : ÃŠÃ£ ÃŠÃ›Ã­Ã­Ã‘ ÃƒÃ“Ã£ Ã‡Ã¡ÃˆÃ¦ÃŠ Ã…Ã¡Ã¬`);
+return message.reply("**Ã¡Ã‡ Ã­Ã£ÃŸÃ¤ÃŸ ÃŠÃ›Ã­Ã­Ã‘ Ã‡Ã¡Ã‡Ã“Ã£ Ã­ÃŒÃˆ ÃšÃ¡Ã­ÃŸ Ã‡Ã¡Ã‡Ã¤ÃŠÃ™Ã‚Ã‘ Ã¡Ã£ÃÃ‰ Ã“Ã‡ÃšÃŠÃ­Ã¤ . **");
 } else
   if (message.content.startsWith(adminprefix + 'setavatar')) {
 client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : Êã ÊÛíÑ ÕæÑÉ ÇáÈæÊ`);
+  message.channel.sendMessage(`**${argresult}** : ÃŠÃ£ ÃŠÃ›Ã­Ã‘ Ã•Ã¦Ã‘Ã‰ Ã‡Ã¡ÃˆÃ¦ÃŠ`);
       } else     
 if (message.content.startsWith(adminprefix + 'setT')) {
   client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**Êã ÊÛííÑ ÊæíÊÔ ÇáÈæÊ Åáì  ${argresult}**`);
+    message.channel.sendMessage(`**ÃŠÃ£ ÃŠÃ›Ã­Ã­Ã‘ ÃŠÃ¦Ã­ÃŠÃ” Ã‡Ã¡ÃˆÃ¦ÃŠ Ã…Ã¡Ã¬  ${argresult}**`);
 }
 
 });
@@ -245,10 +245,10 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}vipsetname ? ÊÛíÑ ÇÓã ÈæÊ
-${prefix}vipsetavatar ? ÊÛíÑ ÕæÑÉ ÈæÊ
-${prefix}vipsetT ? ÊÎáí ÈæÊ ÍÇáÊå ÈäÝÓÌí
-${prefix}vipsetgame ? ÊÎáí ÍÇáÉ ÈæÊ íáÚÈ Ôí
+${prefix}vipsetname ? ÃŠÃ›Ã­Ã‘ Ã‡Ã“Ã£ ÃˆÃ¦ÃŠ
+${prefix}vipsetavatar ? ÃŠÃ›Ã­Ã‘ Ã•Ã¦Ã‘Ã‰ ÃˆÃ¦ÃŠ
+${prefix}vipsetT ? ÃŠÃŽÃ¡Ã­ ÃˆÃ¦ÃŠ ÃÃ‡Ã¡ÃŠÃ¥ ÃˆÃ¤ÃÃ“ÃŒÃ­
+${prefix}vipsetgame ? ÃŠÃŽÃ¡Ã­ ÃÃ‡Ã¡Ã‰ ÃˆÃ¦ÃŠ Ã­Ã¡ÃšÃˆ Ã”Ã­
  `);
    message.channel.sendEmbed(embed);
     
@@ -261,15 +261,15 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}play ? áÊÔÛíá ÃÛäíÉ ÈÑÂÈØ Ãæ ÈÃÓã
-${prefix}skip ? áÊÌÂæÒ ÇáÃÛäíÉ ÇáÍÂáíÉ
-${prefix}pause ? ÅíÞÂÝ ÇáÃÛäíÉ ãÄÞÊÇ
-${prefix}resume ? áãæÂÕáÉ ÇáÅÛäíÉ ÈÚÏ ÅíÞÂÝåÂ ãÄÞÊÇ
-${prefix}vol ? áÊÛííÑ ÏÑÌÉ ÇáÕæÊ 100 - 0
-${prefix}stop ? áÅÎÑÂÌ ÇáÈæÊ ãä ÇáÑæã
-${prefix}np ? áãÚÑÝÉ ÇáÃÛäíÉ ÇáãÔÛáÉ ÍÂáíÇ
-${prefix}queue ? áãÚÑÝÉ ÞÂÆãÉ ÇáÊÔÛíá
-${prefix}viphelp ? áãÚÑÝå ÇæÇãÑ vip
+${prefix}play ? Ø¹Ø´Ø§Ù† ØªØ´ØºÙ„ Ø§Ù„Ù…ÙŠÙˆØ²Ùƒ Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}skip ? Ø¹Ø´Ø§Ù† ØªØ·Ø®Ø·ÙŠ Ø§Ù„Ù…ÙŠÙˆØ²Ùƒ Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}pause ? Ø¹Ø´Ø§Ù† ØªÙˆÙ‚Ù Ø§Ù„Ù…ÙŠÙˆÙƒ Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}resume ? Ø¹Ø´Ø§Ù† Ø§Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}vol ? Ø¹Ø´Ø§Ù† ØªØ¹Ù„ÙŠ Ùˆ ØªÙˆØ·ÙŠ Ø§Ù„ØµÙˆØª Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡ 100 - 0
+${prefix}stop ? Ø¹Ø´Ø§Ù† ØªÙˆÙ‚Ù Ø§Ù„Ø§ØºØ§Ù†ÙŠ Ù†Ù‡Ø¦ÙŠÙ† Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}np ? Ø¹Ø´Ø§Ù† Ø§Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}queue ? Ø¹Ø´Ø§Ù† ØªØ´ÙˆÙÙŠ Ø§Ù„Ø§ØºØ§Ù†ÙŠ Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
+${prefix}viphelp ? Ø®ØµÙŠÙ‡ Ø§Ù„ÙÙŠ Ø§ÙŠ Ø¨ÙŠ Ù„Ù„Ø­Ø¨ Ø§ØµØ§Ù„Ù‡
 `);
    message.channel.sendEmbed(embed);
     
@@ -282,7 +282,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     console.log(`in ${client.guilds.size} servers `);
     console.log(`[Codes] ${client.users.size}`);
-    client.user.setStatus("DND");
+    client.user.setStatus("Online");
 });
 
 
