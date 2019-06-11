@@ -8,7 +8,7 @@ const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const queue = new Map();
 const client = new Discord.Client();
 
-const prefix = "a";
+const prefix = "n";
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
 	
@@ -25,18 +25,18 @@ client.on('message', async msg => { // eslint-disable-line
 	if (command === `play`) {
 
 		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('íÌÈ ÊæÂÌÏ ÍÖÑÊß ÈÑæã ÕæÊí .');
+		if (!voiceChannel) return msg.channel.send('يجب توآجد حضرتك بروم صوتي .');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
 			
-			return msg.channel.send('áÇ íÊæÂÌÏ áÏí ÕáÇÍíÉ ááÊßáã ÈåÐÂ ÇáÑæã');
+			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
 		}
 		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('áÇ íÊæÂÌÏ áÏí ÕáÇÍíÉ ááÊßáã ÈåÐÂ ÇáÑæã');
+			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
 		}
 
 		if (!permissions.has('EMBED_LINKS')) {
-			return msg.channel.sendMessage("**íÌÈ ÊæÂÝÑ ÈÑãÔä `EMBED LINKS`áÏí **");
+			return msg.channel.sendMessage("**يجب توآفر برمشن `EMBED LINKS`لدي **");
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -47,7 +47,7 @@ client.on('message', async msg => { // eslint-disable-line
 				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
 				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
-			return msg.channel.send(` **${playlist.title}** Êã ÇáÅÖÂÝÉ Åáì ÞÃÆãÉ ÇáÊÔÛíá`);
+			return msg.channel.send(` **${playlist.title}** تم الإضآفة إلى قأئمة التشغيل`);
 		} else {
 			try {
 
@@ -57,10 +57,10 @@ client.on('message', async msg => { // eslint-disable-line
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`**ÇáÑÌÂÁ ãä ÍÖÑÊß ÅÎÊíÂÑ ÑÞã ÇáãÞØÚ** :
+			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("Ninja");
+					.setFooter("Mafia");
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)});
 					
 					// eslint-disable-next-line max-depth
@@ -72,13 +72,13 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('áã íÊã ÅÎÊíÂÑ ãÞØÚ ÕæÊí');
+						return msg.channel.send('لم يتم إختيآر مقطع صوتي');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send(':X: áÇ íÊæÝÑ äÊÂÆÌ ÈÍË ');
+					return msg.channel.send(':X: لا يتوفر نتآئج بحث ');
 				}
 			}
 
@@ -86,64 +86,64 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		}
 	} else if (command === `s`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
-		if (!serverQueue) return msg.channel.send('áÇ íÊæÝÑ ãÞØÚ áÊÌÂæÒå');
-		serverQueue.connection.dispatcher.end('Êã ÊÌÂæÒ åÐÂ ÇáãÞØÚ');
+		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
+		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
 		return undefined;
 	} else if (command === `join`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
+		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		msg.member.voiceChannel.join();
 		return undefined;
 	} else if (command === `stop`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
+		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.guild.member(client).voiceChannel.leave();
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Êã ÅíÞÂÝ åÐÂ ÇáãÞØÚ');
+		serverQueue.connection.dispatcher.end('تم إيقآف هذآ المقطع');
 		return undefined;
 	} else if (command === `vol`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send('ÃäÊ áÓÊ ÈÑæã ÕæÊí .');
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÔÛÂá.');
-		if (!args[1]) return msg.channel.send(`:loud_sound: ãÓÊæì ÇáÕæÊ **${serverQueue.volume}**`);
+		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
+		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
-		return msg.channel.send(`:speaker: Êã ÊÛíÑ ÇáÕæÊ Çáí **${args[1]}**`);
+		return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
 	} else if (command === `np`) {
 
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 		const embedNP = new Discord.RichEmbed()
-	.setDescription(`:notes: ÇáÇä íÊã ÊÔÛíá : **${serverQueue.songs[0].title}**`);
+	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`);
 		return msg.channel.sendEmbed(embedNP);
 	} else if (command === `queue`) {
 
 		
-		if (!serverQueue) return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 		let index = 0;
 		
 		const embedqu = new Discord.RichEmbed()
 
 .setDescription(`**Songs Queue**
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**ÇáÇä íÊã ÊÔÛíá** ${serverQueue.songs[0].title}`);
+**الان يتم تشغيل** ${serverQueue.songs[0].title}`);
 		return msg.channel.sendEmbed(embedqu);
 	} else if (command === `pause`) {
 
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('Êã ÅíÞÇÝ ÇáãæÓíÞì ãÄÞÊÇ!');
+			return msg.channel.send('تم إيقاف الموسيقى مؤقتا!');
 		}
-		return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ý ÇáÚãá.');
+		return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('ÇÓÊÃäÝÊ ÇáãæÓíÞì ÈÇáäÓÈÉ áß !');
+			return msg.channel.send('استأنفت الموسيقى بالنسبة لك !');
 		}
-		return msg.channel.send('áÇ íæÌÏ ÔíÁ ÍÇáí Ýí ÇáÚãá.');
+		return msg.channel.send('لا يوجد شيء حالي في العمل.');
 	}
 
 	return undefined;
@@ -179,13 +179,13 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
-			return msg.channel.send(`áÇ ÃÓÊØíÚ ÏÎæá åÐÂ ÇáÑæã ${error}`);
+			return msg.channel.send(`لا أستطيع دخول هذآ الروم ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return msg.channel.send(` **${song.title}** Êã ÇÖÇÝå ÇáÇÛäíÉ Çáí ÇáÞÇÆãÉ!`);
+		else return msg.channel.send(` **${song.title}** تم اضافه الاغنية الي القائمة!`);
 	}
 	return undefined;
 }
@@ -210,31 +210,31 @@ function play(guild, song) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
-	serverQueue.textChannel.send(`ÈÏÁ ÊÔÛíá : **${song.title}**`);
+	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 
 const adminprefix = "1vip";
-const devs = ['587448376887476225','587448376887476225'];
+const devs = ['380254757455134725','380254757455134725'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
     
 if (message.content.startsWith(adminprefix + 'setgame')) {
   client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} Êã ÊÛííÑ ÈáÇíäÞ ÇáÈæÊ Åáì **`);
+    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`);
 } else 
   if (message.content.startsWith(adminprefix + 'setname')) {
 client.user.setUsername(argresult).then;
-    message.channel.sendMessage(`**${argresult}** : Êã ÊÛííÑ ÃÓã ÇáÈæÊ Åáì`);
-return message.reply("**áÇ íãßäß ÊÛííÑ ÇáÇÓã íÌÈ Úáíß ÇáÇäÊÙÂÑ áãÏÉ ÓÇÚÊíä . **");
+    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`);
+return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
 } else
   if (message.content.startsWith(adminprefix + 'setavatar')) {
 client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : Êã ÊÛíÑ ÕæÑÉ ÇáÈæÊ`);
+  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
       } else     
 if (message.content.startsWith(adminprefix + 'setT')) {
   client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**Êã ÊÛííÑ ÊæíÊÔ ÇáÈæÊ Åáì  ${argresult}**`);
+    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`);
 }
 
 });
@@ -245,10 +245,10 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}vipsetname ? ÊÛíÑ ÇÓã ÈæÊ
-${prefix}vipsetavatar ? ÊÛíÑ ÕæÑÉ ÈæÊ
-${prefix}vipsetT ? ÊÎáí ÈæÊ ÍÇáÊå ÈäÝÓÌí
-${prefix}vipsetgame ? ÊÎáí ÍÇáÉ ÈæÊ íáÚÈ Ôí
+${prefix}vipsetname ? تغير اسم بوت
+${prefix}vipsetavatar ? تغير صورة بوت
+${prefix}vipsetT ? تخلي بوت حالته بنفسجي
+${prefix}vipsetgame ? تخلي حالة بوت يلعب شي
  `);
    message.channel.sendEmbed(embed);
     
@@ -261,15 +261,15 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}play ? عشان تشغل الميوزك للحب اصاله
-${prefix}skip ? عشان تطخطي الميوزك للحب اصاله
-${prefix}pause ? عشان توقف الميوك للحب اصاله
-${prefix}resume ? عشان الحب اصاله
-${prefix}vol ? عشان تعلي و توطي الصوت للحب اصاله 100 - 0
-${prefix}stop ? عشان توقف الاغاني نهئين للحب اصاله
-${prefix}np ? عشان الحب اصاله
-${prefix}queue ? عشان تشوفي الاغاني للحب اصاله
-${prefix}viphelp ? خصيه الفي اي بي للحب اصاله
+${prefix}play ? لتشغيل أغنية برآبط أو بأسم
+${prefix}skip ? لتجآوز الأغنية الحآلية
+${prefix}pause ? إيقآف الأغنية مؤقتا
+${prefix}resume ? لموآصلة الإغنية بعد إيقآفهآ مؤقتا
+${prefix}vol ? لتغيير درجة الصوت 100 - 0
+${prefix}stop ? لإخرآج البوت من الروم
+${prefix}np ? لمعرفة الأغنية المشغلة حآليا
+${prefix}queue ? لمعرفة قآئمة التشغيل
+${prefix}viphelp ? لمعرفه اوامر vip
 `);
    message.channel.sendEmbed(embed);
     
@@ -282,9 +282,42 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     console.log(`in ${client.guilds.size} servers `);
     console.log(`[Codes] ${client.users.size}`);
-    client.user.setStatus("Online");
+    client.user.setStatus("DND");
 });
 
+client.on('ready', () => {
+   console.log(`----------------`);
+      console.log(`NeFo`);
+        console.log(`----------------`);
+      console.log(`ON ${client.guilds.size} Servers '     Script By : NeFo `);
+    console.log(`----------------`);
+  console.log(`Logged in as ${client.user.tag}!`);
+client.user.setGame(`مولع خيو`,"http://twitch.tv/S-F")
+client.user.setStatus("online")
+});
+
+client.on('message', message => {
+   
+    let args = message.content.split(' ').slice(1).join(' ');
+   
+  if (message.content === 'ping') {
+      message.channel.send(`<@${message.author.id}> Ping..!`)
+  }
+ 
+ 
+  if (message.content.startsWith('$bc')) {
+          if (!args[0]) {
+message.channel.send("**$bc <message>**");
+return;
+}
+message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
+   m.send(`${args}`);
+ 
+});
+  }
+ 
+});
 
 
 
