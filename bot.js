@@ -261,15 +261,15 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-${prefix}play ? لتشغيل أغنية برآبط أو بأسم
-${prefix}skip ? لتجآوز الأغنية الحآلية
-${prefix}pause ? إيقآف الأغنية مؤقتا
-${prefix}resume ? لموآصلة الإغنية بعد إيقآفهآ مؤقتا
-${prefix}vol ? لتغيير درجة الصوت 100 - 0
-${prefix}stop ? لإخرآج البوت من الروم
-${prefix}np ? لمعرفة الأغنية المشغلة حآليا
-${prefix}queue ? لمعرفة قآئمة التشغيل
-${prefix}viphelp ? لمعرفه اوامر vip
+${prefix}play ? لتشغيل الميوزك لل حب اصاله
+${prefix}skip ? لتخطي الميوزك للحب اصاله
+${prefix}pause ? لئيقاف الاغنيه مؤقت للحب اصاله
+${prefix}resume ? لموصاله اللاغنيه بعد ايقفها مؤقت للحب اصاله
+${prefix}vol ? للصوت للحب اصاله 100 - 0
+${prefix}stop ? لتوقيف البوت و الخروج من الروم للحب اصاله
+${prefix}np ? لمعرفت الاغنيه المشغله حاليا للحب اصاله
+${prefix}queue ? لمعرفه قامه التشغيل للحب اصاله
+${prefix}viphelp ? خصيه الفي اي بي للحب اصاله
 `);
    message.channel.sendEmbed(embed);
     
@@ -292,7 +292,7 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : NeFo `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`مولع خيو`,"http://twitch.tv/S-F")
+client.user.setGame(`احبك يا اصاله`,"http://twitch.tv/S-F")
 client.user.setStatus("online")
 });
 
